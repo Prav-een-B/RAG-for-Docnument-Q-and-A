@@ -74,6 +74,65 @@ pip install -r requirements.txt
 
 ---
 
+## Important configuration before running
+
+### 1. Add your API key
+
+The answer generation step uses an LLM through **OpenRouter**.
+
+Before running the project, open:
+
+```text
+app/generator.py
+```
+
+and replace the API key with your own:
+
+```python
+api_key = "YOUR_OPENROUTER_API_KEY"
+```
+
+You can get a key from:
+
+https://openrouter.ai
+
+---
+
+### 2. Set the document path
+
+The pipeline currently expects a specific PDF file.
+
+Open the file where the document path is defined and update it to your document:
+
+```python
+file_path = "path/to/your/document.pdf"
+```
+
+Make sure the file exists before running the pipeline.
+
+---
+
+### 3. Clear cached embeddings when changing documents
+
+The project stores processed embeddings/chunks locally so that the document does not need to be reprocessed every time.
+
+If you switch to a **different PDF**, you should clear the cached data first (for example the stored embeddings file or cache folder), otherwise the system may still use embeddings from the previous document.
+
+---
+
+## First run
+
+The **first run may take a few minutes** because:
+
+* the PDF is parsed
+* the document is chunked
+* embeddings are generated
+* models may be downloaded
+
+After this initial processing, later runs should be faster.
+
+---
+
 ## Running the project
 
 Run the script:
